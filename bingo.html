@@ -1686,6 +1686,32 @@
   }
 }());
 </script>
+<style>
+#board {
+	display: block;
+	width: 500px;
+}
+
+#board ul {
+	width: 90px;
+	float: left;
+	margin: 0;
+	padding: 0;
+}
+
+#board li {
+	border: 1px solid black;
+    width: 50px;
+    height: 50px;
+    float: left;
+    display: block;
+    margin: 0;
+    padding: 20px;
+    padding-top:35px;
+    padding-bottom:0;
+    text-align: center;
+}
+</style>
 <body>
 
 <div id="caller">
@@ -1698,7 +1724,11 @@
 </div>
 
 <div id="board">
-
+	<ul class="b"><li>B</li></ul>
+	<ul class="i"><li>I</li></ul>
+	<ul class="n"><li>N</li></ul>
+	<ul class="g"><li>G</li></ul>
+	<ul class="o"><li>O</li></ul>
 </div>
 
 
@@ -1744,7 +1774,7 @@ const getNumber = (letter) => {
 			lower = 46;
 			upper = 60;
 			break;
-		case '0':
+		case 'o':
 			lower = 61;
 			upper = 75;
 			break;
@@ -1769,16 +1799,24 @@ const resetNumbers = () => {
 	}
 }
 
+const addSquare = (number) => {
+	const numText = document.createTextNode(number.number);
+	const numLi = document.createElement('li');
+	numLi.appendChild(numText);
+	console.log(`#board .${number.letter}`)
+	document.querySelector(`#board .${number.letter}`).appendChild(numLi);
+}
+
 const fillBoard = () => {
-	for (i = 1; i < 26; i++) {
+	for (let i = 1; i < 26; i++) {
 		let number;
-		if (i < 6) {
+		if (i <= 5) {
 			number = getNumber('b');
-		} else if (i < 11) {
+		} else if (i <= 10) {
 			number = getNumber('i');
-		} else if (i < 16) {
+		} else if (i <= 15) {
 			number = getNumber('n');
-		} else if (i < 21) {
+		} else if (i <= 20) {
 			number = getNumber('g');
 		} else {
 			number = getNumber('o');
@@ -1786,6 +1824,7 @@ const fillBoard = () => {
 		addSquare(number);
 	}
 }
+fillBoard();
 
 const callNumber = () => {
 	const newNumber = getNumber();
