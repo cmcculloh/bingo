@@ -1,4 +1,4 @@
-const possibleNumbers = {};
+let possibleNumbers = {};
 for (var i = 1; i < 76; i++) {
 	let letter;
 	if (i < 16) {
