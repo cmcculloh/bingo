@@ -1,7 +1,4 @@
-
-const board = document.querySelector('#board');
-
-const nums = {};
+const possibleNumbers = {};
 for (var i = 1; i < 76; i++) {
 	let letter;
 	if (i < 16) {
@@ -15,10 +12,10 @@ for (var i = 1; i < 76; i++) {
 	} else {
 		letter = 'o';
 	}
-	nums[i] = {text: `${letter}${i}`, number: i, letter, used: false};
+	possibleNumbers[i] = {text: `${letter}${i}`, number: i, letter, used: false};
 }
 
-const getNumber = (letter) => {
+const selectNumber = (candidateNumbers, letter) => {
 	let lower = 1;
 	let upper = 75;
 
@@ -50,18 +47,20 @@ const getNumber = (letter) => {
 
 	const num = _.random(lower, upper);
 
-	if (nums[num].used) {
-		return getNumber(letter);
+	if (candidateNumbers[num].used) {
+		return selectNumber(candidateNumbers, letter);
 	}
 
-	nums[num].used = true;
-	return nums[num];
+	candidateNumbers[num].used = true;
+	return candidateNumbers[num];
 }
 
-const resetNumbers = () => {
+const resetNumbers = (possibleNumbers) => {
 	for (var i = 1; i < 76; i++) {
-		nums[i].used = false;
+		possibleNumbers[i].used = false;
 	}
+
+	return possibleNumbers;
 }
 
 const addSquare = (number) => {
@@ -72,29 +71,29 @@ const addSquare = (number) => {
 	document.querySelector(`#board .${number.letter}`).appendChild(numLi);
 }
 
-const fillBoard = () => {
+const fillBoard = (possibleNumbers) => {
 	for (let i = 1; i < 26; i++) {
 		let number;
 		if (i <= 5) {
-			number = getNumber('b');
+			number = selectNumber(possibleNumbers, 'b');
 		} else if (i <= 10) {
-			number = getNumber('i');
+			number = selectNumber(possibleNumbers, 'i');
 		} else if (i <= 15) {
-			number = getNumber('n');
+			number = selectNumber(possibleNumbers, 'n');
 		} else if (i <= 20) {
-			number = getNumber('g');
+			number = selectNumber(possibleNumbers, 'g');
 		} else {
-			number = getNumber('o');
+			number = selectNumber(possibleNumbers, 'o');
 		}
 		addSquare(number);
 	}
 }
 
-fillBoard();
-resetNumbers();
+fillBoard(possibleNumbers);
+possibleNumbers = resetNumbers(possibleNumbers);
 
-const callNumber = () => {
-	const newNumber = getNumber();
+const callNumber = (possibleNumbers) => {
+	const newNumber = selectNumber(possibleNumbers);
 	const numText = document.createTextNode(newNumber.text);
 	const utterThis = new SpeechSynthesisUtterance(newNumber.text);
 	synth.speak(utterThis);
@@ -122,7 +121,7 @@ const play = () => {
 let timeout;
 const callNext = () => {
 	if (!paused) {
-		callNumber();
+		callNumber(possibleNumbers);
 
 		const time = document.querySelector('#timeout').value;
 		timeout = window.setTimeout(callNext, time * 1000);
