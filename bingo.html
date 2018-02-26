@@ -1692,6 +1692,10 @@
 	width: 500px;
 }
 
+#board .header {
+	border-bottom: 4px solid black;
+}
+
 #board ul {
 	width: 90px;
 	float: left;
@@ -1717,18 +1721,18 @@
 <div id="caller">
 	<div><input type="button" value="▶️ play" id="play" /></div>
 	<div><input type="button" value="⏸ pause" id="pause" /></div>
-	<div><input type="number" id="timeout" value=30></div>
+	<div><input type="number" id="timeout" value=10></div>
 	<ul id="numbers">
 
 	</ul>
 </div>
 
 <div id="board">
-	<ul class="b"><li>B</li></ul>
-	<ul class="i"><li>I</li></ul>
-	<ul class="n"><li>N</li></ul>
-	<ul class="g"><li>G</li></ul>
-	<ul class="o"><li>O</li></ul>
+	<ul class="b"><li class="header">B</li></ul>
+	<ul class="i"><li class="header">I</li></ul>
+	<ul class="n"><li class="header">N</li></ul>
+	<ul class="g"><li class="header">G</li></ul>
+	<ul class="o"><li class="header">O</li></ul>
 </div>
 
 
@@ -1824,8 +1828,10 @@ const fillBoard = () => {
 		addSquare(number);
 	}
 }
+
 fillBoard();
 resetNumbers();
+
 const callNumber = () => {
 	const newNumber = getNumber();
 	const numText = document.createTextNode(newNumber.text);
