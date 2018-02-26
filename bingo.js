@@ -99,7 +99,9 @@ const callNumber = () => {
 	const utterThis = new SpeechSynthesisUtterance(newNumber.text);
 	synth.speak(utterThis);
 	const numLi = document.createElement('li');
-	numLi.appendChild(numText);
+	const numDiv = document.createElement('div');
+	numDiv.appendChild(numText)
+	numLi.appendChild(numDiv);
 	document.querySelector('#numbers').appendChild(numLi);
 }
 
