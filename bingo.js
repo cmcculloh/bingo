@@ -82,6 +82,10 @@ const fillBoard = (possibleNumbers) => {
 			number = selectNumber(possibleNumbers, 'b');
 		} else if (i <= 10) {
 			number = selectNumber(possibleNumbers, 'i');
+		} else if (i <= 12) {
+			number = selectNumber(possibleNumbers, 'n');
+		} else if (i === 13) {
+			number = {text: 'free', number: 'free', letter: 'n', used: true};
 		} else if (i <= 15) {
 			number = selectNumber(possibleNumbers, 'n');
 		} else if (i <= 20) {
