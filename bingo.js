@@ -67,15 +67,16 @@ const selectNumber = (candidateNumbers, letter) => {
 // 	return numbers;
 // };
 
-const addSquare = (number) => {
+const addSquare = ($boardRoot, number) => {
 	const numText = document.createTextNode(number.number);
 	const numLi = document.createElement('li');
 	numLi.appendChild(numText);
 
-	document.querySelector(`#board .${number.letter}`).appendChild(numLi);
+	$boardRoot.querySelector(`.${number.letter}`).appendChild(numLi);
 };
 
-const fillBoard = (possibleNumbers) => {
+const fillBoard = ($boardRoot, possibleNumbers) => {
+	const boardNumbers = [];
 	for (let i = 1; i < 26; i++) {
 		let number;
 		if (i <= 5) {
@@ -93,8 +94,10 @@ const fillBoard = (possibleNumbers) => {
 		} else {
 			number = selectNumber(possibleNumbers, 'o');
 		}
-		addSquare(number);
+		addSquare($boardRoot, number);
+		boardNumbers.push(number);
 	}
+	return boardNumbers;
 };
 
 const callNumber = (possibleNumbers) => {
@@ -118,7 +121,8 @@ const callNext = (possibleNumbers) => {
 	}
 };
 
-fillBoard(generatePossibleNumbers());
+
+const board = fillBoard(document.querySelector('#board'), generatePossibleNumbers());
 
 let paused = false;
 let timeout;
