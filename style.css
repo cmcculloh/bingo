@@ -2,40 +2,28 @@ body {
 	font-family: sans-serif;
 }
 
-#board {
-	clear: both;
-	display: block;
-	width: 500px;
+#caller {
+	margin: 10px;
 }
 
-#board .header {
-	border-bottom: 4px solid black;
+#caller input {
+	border: 1px solid #333;
+	border-radius: 4px;
+	width: 150px;
+	height: 50px;
+	margin: 6px;
+	font-size: 24px;
 }
 
-#board ul {
-	width: 90px;
-	float: left;
-	margin: 0;
-	padding: 0;
-}
-
-#board li {
-	border: 1px solid black;
-    width: 50px;
-    height: 50px;
-    float: left;
-    display: block;
-    margin: 0;
-    padding: 20px;
-    padding-top:35px;
-    padding-bottom:0;
-    text-align: center;
+#caller input[type=number] {
+	padding-left: 10px;
+	width: 137px;
 }
 
 #numbers {
 	text-transform: uppercase;
 	width: 100%;
-	display: block;
+	display: flex;
 	clear: both;
 }
 
@@ -57,4 +45,35 @@ body {
 
 #numbers li div {
 	margin-top: 10px;
+}
+
+
+#board {
+	clear: both;
+	display: block;
+	width: 500px;
+}
+
+#board .header {
+	border-bottom: 4px solid black;
+}
+
+#board ul {
+	width: 90px;
+	float: left;
+	margin: 0;
+	padding: 0;
+}
+
+#board li {
+	border: 1px solid black;
+	width: 50px;
+	height: 50px;
+	float: left;
+	display: block;
+	margin: 0;
+	padding: 20px;
+	padding-top:35px;
+	padding-bottom:0;
+	text-align: center;
 }
