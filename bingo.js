@@ -110,6 +110,9 @@ const callNumber = (possibleNumbers) => {
 	numDiv.appendChild(numText);
 	numLi.appendChild(numDiv);
 	document.querySelector('#numbers').appendChild(numLi);
+
+	const numberCalled = new CustomEvent('numberCalled', { detail: newNumber });
+	window.dispatchEvent(numberCalled);
 };
 
 const callNext = (possibleNumbers) => {
@@ -121,6 +124,9 @@ const callNext = (possibleNumbers) => {
 	}
 };
 
+window.addEventListener('numberCalled', (e) => {
+	console.log('number called', e.detail);
+}, false);
 
 const board = fillBoard(document.querySelector('#board'), generatePossibleNumbers());
 
