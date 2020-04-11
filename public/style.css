@@ -43,6 +43,10 @@ body {
 	color: #FFF;
 }
 
+li.number.selected {
+	background-color: #aaf;
+}
+
 #numbers li div {
 	margin-top: 10px;
 }

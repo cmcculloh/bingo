@@ -71,6 +71,7 @@ const addSquare = ($boardRoot, number) => {
 	const numText = document.createTextNode(number.number);
 	const numLi = document.createElement('li');
 	numLi.appendChild(numText);
+	numLi.classList.add('number');
 
 	$boardRoot.querySelector(`.${number.letter}`).appendChild(numLi);
 };
@@ -130,15 +131,24 @@ window.addEventListener('numberCalled', (e) => {
 
 const board = fillBoard(document.querySelector('#board'), generatePossibleNumbers());
 
+document.querySelectorAll('.number').forEach(number => number.addEventListener('click', (evt) => {
+	console.log('here')
+	evt.target.classList.toggle('selected');
+}))
+
 let paused = false;
 let timeout;
 const pause = () => {
+	pauseButton.value = '⏯ paused';
+	playButton.value = '▶️ play'
 	window.clearTimeout(timeout);
 	paused = true;
 };
 
 let possibleNumbers = generatePossibleNumbers();
 const play = () => {
+	pauseButton.value = '⏸ pause';
+	playButton.value = '▶️ playing'
 	paused = false;
 	callNext(possibleNumbers);
 };
